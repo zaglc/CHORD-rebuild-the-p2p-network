@@ -25,7 +25,7 @@ it's a project in network of computer and was implemented directly and simply (w
   python experiment.py multihop 1 2 8
   python experiment.py modify
   ```
-+ 生成可视化：将`IL_LEN`改为3，4或5，直接运行
++ 生成可视化：将`IL_LEN`改为3，4或5，直接运行![示例](https://github.com/zaglc/CHORD-rebuild-the-p2p-network/blob/main/visualize/5_lookup_30/total.gif)
   ```
   python demo.py <path>
   ```
