@@ -30,7 +30,7 @@ class node(object):
         self.finger[i] = {'start':st, 'succ': succ}
 
     # lookup
-    def find_successor(self, id, visual = False) -> int:
+    def find_successor(self, id, visual = False, optimize = True) -> int:
         # 统计跳数
         if not CHORD.verbose:
             CHORD.hd.count()
@@ -45,10 +45,10 @@ class node(object):
                 )
             
         '''改进'''
-        if interval_cmp(id, mod(self.predecessor,1), mod(self.id,1)):
+        if interval_cmp(id, mod(self.predecessor,1), mod(self.id,1)) and optimize:
             ret = self.id
         
-        elif not interval_cmp(id, mod(self.id,1), mod(self._get_succ(),1)):
+        elif not interval_cmp(id, mod(self.id,1), mod(self._get_succ(),1)) or not optimize:
             n_prede = self.find_predecessor(id, visual)
             ret = nodelist[n_prede]._get_succ()
         else:
@@ -79,7 +79,7 @@ class node(object):
                     is_terminal = False,
                     op = "lookup",
                     target = id
-                    )
+                )
             
             # 统计跳数
             if not CHORD.verbose:
@@ -224,7 +224,7 @@ class chord(object):
             visual = False
 
         k = random.sample(nodelist.keys(), 1)[0]
-        id = nodelist[k].find_successor(get_id(key), visual)
+        id = nodelist[k].find_successor(get_id(key), visual, self.optimize)
         if self.verbose:
             loggers.log_key(nodelist[id], key)
             if id == get_id(key):
@@ -315,7 +315,10 @@ class chord(object):
         plt.xlabel("LOG(N)")
         plt.ylabel("HOP nums.")
         plt.savefig("./figs/box.png")
-        np.save("./visualize/data.npy",np.array(mean))
+        if self.optimize == True:
+            np.save("./data/data_optm.npy",np.array(mean))
+        else:
+            np.save("./data/data_orig.npy",np.array(mean))
 
     def image_stat(self, **kwargs):
         self.plot_once(step=self.visual_step, kwargs=kwargs)
@@ -360,6 +363,10 @@ class chord(object):
         for i in range(num):
             plt.text(0.85*math.cos(2*math.pi*i/num)-st,0.85*math.sin(2*math.pi*i/num),str(i),fontsize=20)
         
+        if step == 0 and os.path.exists("./visualize/{}_{}_{}".format(ID_LEN, op, target)):
+            for file in os.listdir("./visualize/{}_{}_{}".format(ID_LEN, op, target)):
+                os.remove("./visualize/{}_{}_{}/{}".format(ID_LEN, op, target, file))
+
         if not os.path.exists("./visualize/{}_{}_{}".format(ID_LEN, op, target)):
             os.mkdir("./visualize/{}_{}_{}".format(ID_LEN, op, target))
         plt.savefig("./visualize/{}_{}_{}/{}".format(ID_LEN, op, target, step))
