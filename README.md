@@ -34,7 +34,7 @@ it's a project in network of computer and was implemented directly and simply (w
   python experiment.py multihop 1 2 8
   python experiment.py modify
   ```
-+ 生成可视化：将`IL_LEN`改为3，4或5，直接运行
++ 生成可视化：将`IL_LEN`改为3，4或5，直接运行；蓝色点代表服务器，标红代表当前查询到的节点，绿色代表目标节点，三角形代表目标id对应哈希环上的位置
 
   <img src=https://github.com/zaglc/CHORD-rebuild-the-p2p-network/blob/main/visualize/5_lookup_30/total.gif width = "450" height = "450" alt="图片名称" align=center>
   
