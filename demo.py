@@ -10,11 +10,13 @@ def main(argv):
     script = argv[1]#"./scripts.txt"
     ret = run(1, script)
     # base = argv[2]#"4_lookup_2"
-    assert isinstance(ret,int)
+    assert isinstance(ret, int)
     base = "{}_lookup_{}".format(ID_LEN, get_id(str(ret-1)))
     fig, ax = plt.subplots(1,1,figsize = (10,10))
     imglist = []
 
+    if not os.path.exists("./visualize"):
+        os.mkdir("./visualize")
     for i in os.listdir("./visualize/{}".format(base)):
         ax.set_axis_off()
         if i[0] == 't':
