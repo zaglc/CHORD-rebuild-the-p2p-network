@@ -1,0 +1,10 @@
+START
+join 123
+join 234
+join 92653
+join 12432543
+join 8365482548268
+join 926397879
+join breoiuou
+lookup 2345 1
+q

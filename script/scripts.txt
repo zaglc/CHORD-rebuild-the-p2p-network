@@ -1,0 +1,7 @@
+START
+join 123
+join 234
+join 92653
+join 8365482548268
+lookup 9679 1
+q
