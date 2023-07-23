@@ -2,7 +2,7 @@ from myclass import *
 from utils import *
 import os
 
-def execute_cmd(cmd: str, mode=1):
+def execute_cmd(cmd: str, mode = 1):
     cd_lst = cmd.split(' ')
     # print(cd_lst)
     if cd_lst[0] == "lookup":
@@ -28,11 +28,7 @@ def execute_cmd(cmd: str, mode=1):
             print("MISSING ONE ARGMENT: key")
     
     elif cd_lst[0] == "join":
-        # if len(cd_lst) == 3:
-        #     # print(cd_lst)
-        #     CHORD.join(cd_lst[1], True)
         if cd_lst[1]:
-            # print(cd_lst[1])
             CHORD.join(cd_lst[1])
         else:
             print("MISSING ONE ARGMENT: key")
@@ -64,7 +60,7 @@ def execute_cmd(cmd: str, mode=1):
 
     else:
         print("INSTRUCTION {} NO FOUND\nOnly {} allowed".format\
-              (cd_lst[0],["lookup","insert""delete","join","leave","clear","show","q"]))
+              (cd_lst[0],["lookup","insert","delete","join","leave","clear","show","q"]))
     return True
 
 def run(mode = 0, path = ""):
@@ -73,7 +69,7 @@ def run(mode = 0, path = ""):
         try:
             cmd_reader = open(path, 'r')
         except:
-            exit("NO INSTRUCTIONS")
+            exit("NO INSTRUCTIONS FILE")
         cd_lst = cmd_reader.readline()
         while cd_lst:
             cd_lst = cmd_reader.readline()
